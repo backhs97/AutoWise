@@ -12,7 +12,7 @@ const Tab = createBottomTabNavigator();
 
 const Layout = () => {
   return (
-    <NavigationContainer>
+    <NavigationContainer independent={true}>
       <Tab.Navigator initialRouteName="Home">
         <Tab.Screen name="Home" component={SearchScreen} />
         <Tab.Screen name="Favorites" component={FavoritesScreen} />
