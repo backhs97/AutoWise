@@ -19,6 +19,7 @@ const AuthNavigator = () => {
     <AuthStack.Navigator initialRouteName="Register" independent={true}>
       <AuthStack.Screen name="Login" component={LoginScreen} />
       <AuthStack.Screen name="Register" component={RegisterScreen} />
+      <AuthStack.Screen name="Search" component={SearchScreen} />
     </AuthStack.Navigator>
   );
 };
@@ -35,6 +36,10 @@ const MainNavigator = () => {
 
 const Layout = () => {
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
+
+  const handleLogin = (status) => {
+    setIsLoggedIn(!status);
+  };
 
   return (
     <NavigationContainer independent={true}>
