@@ -1,40 +1,38 @@
+from rest_framework import serializers
+from django.contrib.auth import get_user_model, authenticate
+from .models import Car
 
-from django.db import models
-from django.contrib.auth.base_user import BaseUserManager
-from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
+UserModel = get_user_model()
 
-class AppUserManager(BaseUserManager):
-	def create_user(self, email, password=None):
-		if not email:
-			raise ValueError('An email is required.')
-		if not password:
-			raise ValueError('A password is required.')
-		email = self.normalize_email(email)
-		user = self.model(email=email)
-		user.set_password(password)
-		user.save()
-		return user
-	def create_superuser(self, email, password=None):
-		if not email:
-			raise ValueError('An email is required.')
-		if not password:
-			raise ValueError('A password is required.')
-		user = self.create_user(email, password)
-		user.is_superuser = True
-		user.save()
-		return user
+class UserRegisterSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = UserModel
+        fields = '__all__'
 
+    def register(self, clean_data):
+        user = UserModel.objects.create_user(email=clean_data['email'],
+                                             password=clean_data['password'])
+        user.save()
+        return user
 
-class AppUser(AbstractBaseUser, PermissionsMixin):
-	user_id = models.AutoField(primary_key=True)
-	email = models.EmailField(max_length=50, unique=True)
-	username = models.CharField(max_length=50)
-	USERNAME_FIELD = 'email'
-	REQUIRED_FIELDS = ['username']
-	objects = AppUserManager()
-	def __str__(self):
-		return self.username
+class UserLoginSerializer(serializers.Serializer):
+    email = serializers.EmailField()
+    password = serializers.CharField()
 
-# class Car(models.Model):
-#     user = models.ForeignKey(AppUser, on_delete=models.CASCADE)
-#     price = models.DecimalField(max_digits=10, decimal_places=2)
+    def check_user(self, clean_data):
+        user = authenticate(username=clean_data["email"],
+                            password=clean_data["password"])
+        if user and user.is_active:
+            return user
+        raise serializers.ValidationError("Unable to log in with provided credentials")
+
+class UserSerializer(serializers.ModelSerializer):
+	class Meta:
+		model = UserModel
+		fields = ('email')
+
+class CarSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Car
+        fields = '__all__'
+
