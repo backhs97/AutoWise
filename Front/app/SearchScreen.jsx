@@ -1,127 +1,82 @@
-import React from "react";
-import {
-  StyleSheet,
-  SafeAreaView,
-  ScrollView,
-  View,
-  Text,
-  TextInput,
-  Button,
-  TouchableOpacity,
-} from "react-native";
+import React, { useState } from "react";
+import { View, Text, TextInput, Button, StyleSheet } from "react-native";
 
-import Slider from "@react-native-community/slider";
+import { Alert } from "react-native";
 
-import { COLORS } from "../constants/theme";
+const SearchPage = ({ navigation }) => {
+  const [searchParams, setSearchParams] = useState({
+    model: "",
+    make: "",
+    color: "",
+    zipCode: "",
+    price: "",
+  });
 
-const SearchScreen = () => {
-  const [model, onChangeModel] = React.useState("");
-  const [make, onChangeMake] = React.useState("");
-  const [color, onChangeColor] = React.useState("");
-  const [zipcode, onChangeZipcode] = React.useState("");
-  const [price, onChangePrice] = React.useState(0);
-  const [minValue, setMinValue] = React.useState(0);
-  const [maxValue, setMaxValue] = React.useState(100);
+  const handleSearch = () => {
+    console.log("Search parameters:", searchParams);
 
-  // api request
+    if (
+      !searchParams.model ||
+      !searchParams.make ||
+      !searchParams.color ||
+      !searchParams.zipCode ||
+      !searchParams.price
+    ) {
+      Alert.alert("Please fill in all fields");
+      return;
+    }
+
+    navigation.navigate("Results", { params: searchParams });
+  };
 
   return (
-    <SafeAreaView
-      style={{
-        display: "flex",
-        alignItems: "center",
-        flex: 1,
-        backgroundColor: COLORS.primary,
-      }}
-    >
-      <View
-        style={{
-          display: "flex",
-          flex: 1,
-          // justifyContent: 'center',
-
-          alignItems: "center",
-          paddingTop: 125,
-        }}
-      >
-        <Text
-          style={{ color: COLORS.secondary, fontSize: 26, fontWeight: "bold" }}
-        >
-          Search for your desired car
-        </Text>
-
-        <TextInput
-          style={{
-            height: 40,
-            borderWidth: 1,
-            padding: 10,
-            marginTop: 20,
-            borderRadius: 5,
-          }}
-          onChangeText={onChangeModel}
-          value={model}
-          placeholder="Model"
-        />
-        <TextInput
-          style={{
-            height: 40,
-            borderWidth: 1,
-            padding: 10,
-            marginTop: 20,
-            borderRadius: 5,
-          }}
-          onChangeText={onChangeMake}
-          value={make}
-          placeholder="Make"
-        />
-        <TextInput
-          style={{
-            height: 40,
-            borderWidth: 1,
-            padding: 10,
-            marginTop: 20,
-            borderRadius: 5,
-          }}
-          onChangeText={onChangeColor}
-          value={color}
-          placeholder="Color"
-        />
-        <TextInput
-          style={{
-            height: 40,
-            borderWidth: 1,
-            padding: 10,
-            marginTop: 20,
-            borderRadius: 5,
-          }}
-          onChangeText={onChangeZipcode}
-          value={zipcode}
-          placeholder="Zipcode"
-          keyboardType="numeric"
-        />
-
-        {/* price range thing */}
-        <View>
-          <Text>Price Range</Text>
-          <Slider>
-            style={{ width: 900, height: 40 }}
-            minimumValue={0}
-            maximumValue={1000000000}
-            minimumTrackTintColor="#FFFFFF" maximumTrackTintColor="#000000"
-          </Slider>
-        </View>
-
-        <View
-          style={{
-            marginTop: 20,
-            padding: 10,
-          }}
-        >
-          <Button color={COLORS.secondary} title="Search" />
-        </View>
-      </View>
-    </SafeAreaView>
+    <View style={styles.container}>
+      <TextInput
+        placeholder="Model"
+        value={searchParams.model}
+        onChangeText={(text) =>
+          setSearchParams({ ...searchParams, model: text })
+        }
+      />
+      <TextInput
+        placeholder="Make"
+        value={searchParams.make}
+        onChangeText={(text) =>
+          setSearchParams({ ...searchParams, make: text })
+        }
+      />
+      <TextInput
+        placeholder="Color"
+        value={searchParams.color}
+        onChangeText={(text) =>
+          setSearchParams({ ...searchParams, color: text })
+        }
+      />
+      <TextInput
+        placeholder="zip code"
+        value={searchParams.zipCode}
+        onChangeText={(text) =>
+          setSearchParams({ ...searchParams, zipCode: text })
+        }
+      />
+      <TextInput
+        placeholder="Price"
+        value={searchParams.price}
+        onChangeText={(text) =>
+          setSearchParams({ ...searchParams, price: text })
+        }
+      />
+      <Button title="Search" onPress={handleSearch} />
+    </View>
   );
 };
 
-export default SearchScreen;
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 10,
+    backgroundColor: "#fff",
+  },
+});
+
+export default SearchPage;
