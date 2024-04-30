@@ -16,8 +16,6 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Icon from "react-native-vector-icons/FontAwesome";
 
-import
-
 const ResultsScreen = ({ route, navigation }) => {
   const { params } = route.params;
   const [searchResults, setSearchResults] = useState([]);
@@ -127,4 +125,3 @@ const styles = StyleSheet.create({
 });
 
 export default ResultsScreen;
-
