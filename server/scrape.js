@@ -23,6 +23,7 @@ const scrapeCarData = async (searchParams) => {
       const carDistance = $(element).find(".miles-from").text().trim();
       const imageUrl = $(element).find("img.vehicle-image").attr("data-src");
 
+
       cars.push({
         model: carModel,
         price: carPrice,

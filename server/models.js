@@ -19,7 +19,6 @@ const User = sequelize.define("user", {
 });
 
 const Car = sequelize.define("car", {
-  // Attributes
   model: {
     type: Sequelize.STRING,
     allowNull: false,
@@ -63,16 +62,8 @@ const CarUrl = sequelize.define("CarUrl", {
     type: Sequelize.STRING,
     allowNull: false,
   },
-  carId: {
-    type: Sequelize.INTEGER,
-    references: {
-      model: "Car",
-      key: "id",
-    },
-  },
 });
 
-Car.hasMany(CarUrl);
 CarUrl.belongsTo(Car);
 
 module.exports = { Car, CarUrl, Notification };
