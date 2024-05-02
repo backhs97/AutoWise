@@ -4,7 +4,6 @@ import { View, Text, Image, StyleSheet, TouchableOpacity, Touchable} from 'react
 const WelcomeScreen = ({navigation}) => {
   return (
     <TouchableOpacity style={styles.container} onPress={() => navigation.navigate ('Login')}>
-      <Text style={styles.title}>Welcome to CarWise</Text>
       <Image
         style={styles.image}
         source={require('./assets/car_logo.png')}
@@ -20,17 +19,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#FF5B00',
   },
-  title: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginBottom: 20,
-    color: '#FFFFFF', // Added color for title
-  },
   image: {
-    width: 1000, // Adjusted width for the image
-    height: 1000, // Adjusted height for the image
+    width: 1500, // Adjusted width for the image
+    height: 1500, // Adjusted height for the image
     resizeMode: 'contain',
   },
 });
 
 export default WelcomeScreen;
+
