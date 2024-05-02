@@ -1,45 +1,59 @@
-import React, { useState } from 'react';
-import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import React, { useState } from "react";
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from "react-native";
 
-const SignUpScreen = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [email, setEmail] = useState('');
+const SearchPage = ({ navigation }) => {
+  const [searchParams, setSearchParams] = useState({
+    model: "",
+    make: "",
+    color: "",
+    zipCode: "",
+    price: "",
+  });
 
-  const handleSignUp = () => {
-    console.log('Username:', username);
-    console.log('Password:', password);
-    console.log('Email:', email);
-    // Implement your signup logic here
+  const handleSearch = () => {
+    console.log("Search parameters:", searchParams);
+    if (!searchParams.model || !searchParams.make || !searchParams.zipCode || !searchParams.color || !searchParams.price) {
+      Alert.alert("Please fill in all fields");
+      return;
+    }
+    navigation.navigate("Results", { params: searchParams });
   };
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Sign Up</Text>
+      <Text style={styles.headerText}>Search for your desired car</Text>
       <TextInput
         style={styles.input}
-        placeholder="Email"
-        value={email}
-        onChangeText={setEmail}
-        autoCapitalize="none"
+        placeholder="Make"
+        value={searchParams.make}
+        onChangeText={(text) => setSearchParams({ ...searchParams, make: text })}
       />
       <TextInput
         style={styles.input}
-        placeholder="Username"
-        value={username}
-        onChangeText={setUsername}
-        autoCapitalize="none"
+        placeholder="Model"
+        value={searchParams.model}
+        onChangeText={(text) => setSearchParams({ ...searchParams, model: text })}
       />
       <TextInput
         style={styles.input}
-        placeholder="Password"
-        value={password}
-        onChangeText={setPassword}
-        secureTextEntry
-        autoCapitalize="none"
+        placeholder="Color"
+        value={searchParams.color}
+        onChangeText={(text) => setSearchParams({ ...searchParams, color: text })}
       />
-      <TouchableOpacity style={styles.button} onPress={handleSignUp}>
-        <Text style={styles.buttonText}>Sign Up</Text>
+      <TextInput
+        style={styles.input}
+        placeholder="Zip Code"
+        value={searchParams.zipCode}
+        onChangeText={(text) => setSearchParams({ ...searchParams, zipCode: text })}
+      />
+      <TextInput
+        style={styles.input}
+        placeholder="Price"
+        value={searchParams.price}
+        onChangeText={(text) => setSearchParams({ ...searchParams, price: text })}
+      />
+      <TouchableOpacity style={styles.button} onPress={handleSearch}>
+        <Text style={styles.buttonText}>Search</Text>
       </TouchableOpacity>
     </View>
   );
@@ -48,36 +62,43 @@ const SignUpScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FF5B00',
-    alignItems: 'center',
-    justifyContent: 'center',
     padding: 20,
+    backgroundColor: "#fff",
+    alignItems: 'center',  // Center content horizontally
+    justifyContent: 'center'  // Center content vertically
   },
-  title: {
-    fontSize: 24,
+  headerText: {
+    fontSize: 20,
     fontWeight: 'bold',
-    color: 'white',
     marginBottom: 20,
+    textAlign: 'center',
+    color: 'gray'
   },
   input: {
-    width: '100%',
-    backgroundColor: 'white',
-    padding: 15,
-    marginBottom: 10,
-    borderRadius: 10,
+    height: 40,
+    width: '80%',  // Width of 80% of the screen width
+    marginVertical: 10,
+    paddingLeft: 10,
+    borderRadius: 20,
+    borderWidth: 1,
+    borderColor: '#ccc',
+    backgroundColor: '#fff'
   },
   button: {
-    backgroundColor: 'white',
-    width: '100%',
-    padding: 15,
+    width: '80%',
+    height: 40,
+    backgroundColor: '#FF6A00',  // Button color similar to your provided image
+    justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: 10,
+    borderRadius: 20,
+    marginTop: 20,
   },
   buttonText: {
-    color: '#FF6A00',
+    color: '#fff',
     fontWeight: 'bold',
   }
 });
 
-export default SignUpScreen;
+export default SearchPage;
+
 
