@@ -1,15 +1,15 @@
 import React from 'react';
-import { View, Text, Image, StyleSheet } from 'react-native';
+import { View, Text, Image, StyleSheet, TouchableOpacity, Touchable} from 'react-native';
 
-const WelcomeScreen = () => {
+const WelcomeScreen = ({navigation}) => {
   return (
-    <View style={styles.container}>
+    <TouchableOpacity style={styles.container} onPress={() => navigation.navigate ('Login')}>
       <Text style={styles.title}>Welcome to CarWise</Text>
       <Image
         style={styles.image}
         source={require('./assets/car_logo.png')}
       />
-    </View>
+    </TouchableOpacity>
   );
 };
 
@@ -27,8 +27,8 @@ const styles = StyleSheet.create({
     color: '#FFFFFF', // Added color for title
   },
   image: {
-    width: 200, // Adjusted width for the image
-    height: 200, // Adjusted height for the image
+    width: 1000, // Adjusted width for the image
+    height: 1000, // Adjusted height for the image
     resizeMode: 'contain',
   },
 });
