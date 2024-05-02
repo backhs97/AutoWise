@@ -1,72 +1,46 @@
-import React, { useState } from "react";
-import { View, Text, TextInput, Button, StyleSheet } from "react-native";
+import React, { useState } from 'react';
+import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 
-import { Alert } from "react-native";
+const SignUpScreen = () => {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('');
 
-const SearchPage = ({ navigation }) => {
-  const [searchParams, setSearchParams] = useState({
-    model: "",
-    make: "",
-    color: "",
-    zipCode: "",
-    price: "",
-  });
-
-  const handleSearch = () => {
-    console.log("Search parameters:", searchParams);
-
-    if (
-      !searchParams.model ||
-      !searchParams.make ||
-      !searchParams.color ||
-      !searchParams.zipCode ||
-      !searchParams.price
-    ) {
-      Alert.alert("Please fill in all fields");
-      return;
-    }
-
-    navigation.navigate("Results", { params: searchParams });
+  const handleSignUp = () => {
+    console.log('Username:', username);
+    console.log('Password:', password);
+    console.log('Email:', email);
+    // Implement your signup logic here
   };
 
   return (
     <View style={styles.container}>
+      <Text style={styles.title}>Sign Up</Text>
       <TextInput
-        placeholder="Model"
-        value={searchParams.model}
-        onChangeText={(text) =>
-          setSearchParams({ ...searchParams, model: text })
-        }
+        style={styles.input}
+        placeholder="Email"
+        value={email}
+        onChangeText={setEmail}
+        autoCapitalize="none"
       />
       <TextInput
-        placeholder="Make"
-        value={searchParams.make}
-        onChangeText={(text) =>
-          setSearchParams({ ...searchParams, make: text })
-        }
+        style={styles.input}
+        placeholder="Username"
+        value={username}
+        onChangeText={setUsername}
+        autoCapitalize="none"
       />
       <TextInput
-        placeholder="Color"
-        value={searchParams.color}
-        onChangeText={(text) =>
-          setSearchParams({ ...searchParams, color: text })
-        }
+        style={styles.input}
+        placeholder="Password"
+        value={password}
+        onChangeText={setPassword}
+        secureTextEntry
+        autoCapitalize="none"
       />
-      <TextInput
-        placeholder="zip code"
-        value={searchParams.zipCode}
-        onChangeText={(text) =>
-          setSearchParams({ ...searchParams, zipCode: text })
-        }
-      />
-      <TextInput
-        placeholder="Price"
-        value={searchParams.price}
-        onChangeText={(text) =>
-          setSearchParams({ ...searchParams, price: text })
-        }
-      />
-      <Button title="Search" onPress={handleSearch} />
+      <TouchableOpacity style={styles.button} onPress={handleSignUp}>
+        <Text style={styles.buttonText}>Sign Up</Text>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -74,9 +48,36 @@ const SearchPage = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 10,
-    backgroundColor: "#fff",
+    backgroundColor: '#FF5B00',
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 20,
   },
+  title: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: 'white',
+    marginBottom: 20,
+  },
+  input: {
+    width: '100%',
+    backgroundColor: 'white',
+    padding: 15,
+    marginBottom: 10,
+    borderRadius: 10,
+  },
+  button: {
+    backgroundColor: 'white',
+    width: '100%',
+    padding: 15,
+    alignItems: 'center',
+    borderRadius: 10,
+  },
+  buttonText: {
+    color: '#FF6A00',
+    fontWeight: 'bold',
+  }
 });
 
-export default SearchPage;
+export default SignUpScreen;
+
