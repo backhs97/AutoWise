@@ -33,6 +33,7 @@ app.post("/search", async (req, res) => {
   try {
     const searchParams = req.body;
     const carData = await scrapeCarData(searchParams);
+    console.log(carData);
     res.json(carData);
   } catch (error) {
     res.status(500).send("Error processing your request");
