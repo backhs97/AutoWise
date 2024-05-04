@@ -28,6 +28,7 @@ const scrapeCarData = async (searchParams) => {
             .attr("data-src");
 
           cars.push({
+            source: "cars.com",
             model: carModel,
             price: carPrice,
             carDealer: carDealer,
@@ -53,6 +54,7 @@ const scrapeCarData = async (searchParams) => {
           ).attr("src");
 
           cars.push({
+            source: "autotrader.com",
             model: carModel,
             price: carPrice,
             carDealer: carDealer,

@@ -43,6 +43,10 @@ const Car = sequelize.define("car", {
     type: Sequelize.STRING,
     allowNull: true,
   },
+  source: {
+    type: Sequelize.STRING,
+    allowNull: true,
+  },
 });
 
 const Notification = sequelize.define("notification", {
