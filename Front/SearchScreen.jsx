@@ -37,7 +37,7 @@ const SearchPage = ({ navigation }) => {
         onChangeText={(text) => setSearchParams({ ...searchParams, model: text })}
       />
       <TextInput
-
+        style={styles.input}
         placeholder="New or Used"
         value={searchParams.type}
         onChangeText={(text) =>
@@ -45,6 +45,7 @@ const SearchPage = ({ navigation }) => {
         }
       />
       <TextInput
+        style={styles.input}
         placeholder="Year"
         value={searchParams.year}
         onChangeText={(text) =>
@@ -52,7 +53,7 @@ const SearchPage = ({ navigation }) => {
         }
       />
       <TextInput
-
+        style={styles.input}
         placeholder="Color"
         value={searchParams.color}
         onChangeText={(text) => setSearchParams({ ...searchParams, color: text })}
