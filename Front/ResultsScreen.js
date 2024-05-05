@@ -18,14 +18,18 @@ import Icon from "react-native-vector-icons/FontAwesome";
 
 const ResultsScreen = ({ route, navigation }) => {
   const { params } = route.params;
-  const [searchResults, setSearchResults] = useState([]);
+  const [searchResults1, setSearchResults1] = useState([]);
+  const [searchResults2, setSearchResults2] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
   const getResults = async () => {
     setIsLoading(true);
     try {
       const response = await axios.post("http://localhost:3000/search", params);
-      setSearchResults(response.data);
+      setSearchResults1(response.data.cars);
+      setSearchResults2(response.data.autotrader);
+      console.log(response.data.cars);
+      console.log(response.data);
     } catch (error) {
       console.error("Error fetching results:", error);
     }
@@ -39,11 +43,14 @@ const ResultsScreen = ({ route, navigation }) => {
   const handleBookmark = async (item) => {
     try {
       await axios.post("http://localhost:3000/car/favorite", {
+        type: item.type,
         model: item.model,
         price: item.price,
         distance: item.distance,
         carDealer: item.carDealer,
-        imageUrl: item.imageUrl,
+        url: item.imageUrl,
+        source: item.source,
+        year: item.year,
       });
       console.log("Item bookmarked:", item.model);
     } catch (error) {
@@ -59,22 +66,45 @@ const ResultsScreen = ({ route, navigation }) => {
       {isLoading ? (
         <ActivityIndicator size="large" />
       ) : (
-        <ScrollView>
-          {searchResults.map((item, index) => (
-            <View key={index.toString()} style={styles.card}>
-              <View style={styles.cardHeader}>
-                <Text style={styles.itemText}>Model: {item.model}</Text>
-                <TouchableOpacity onPress={() => handleBookmark(item)}>
-                  <Icon name="bookmark" size={20} />
-                </TouchableOpacity>
+        <>
+          <ScrollView>
+            {searchResults1.map((item, index) => (
+              <View key={index.toString()} style={styles.card}>
+                <View style={styles.cardHeader}>
+                  <Text style={styles.itemText}>Model: {item.model}</Text>
+                  <TouchableOpacity onPress={() => handleBookmark(item)}>
+                    <Icon name="bookmark" size={20} />
+                  </TouchableOpacity>
+                </View>
+                <Text style={styles.itemText}>source: {item.source}</Text>
+                <Text style={styles.itemText}>Price: {item.price}</Text>
+                <Text style={styles.itemText}>type: {item.type}</Text>
+                <Text style={styles.itemText}>Dealer: {item.carDealer}</Text>
+                <Text style={styles.itemText}>Location: {item.distance}</Text>
+                <Image source={{ uri: item.imageUrl }} style={styles.image} />
               </View>
-              <Text style={styles.itemText}>Price: {item.price}</Text>
-              <Text style={styles.itemText}>Dealer: {item.carDealer}</Text>
-              <Text style={styles.itemText}>Location: {item.distance}</Text>
-              <Image source={{ uri: item.imageUrl }} style={styles.image} />
-            </View>
-          ))}
-        </ScrollView>
+            ))}
+
+            {searchResults2.map((item, index) => (
+              <View key={index.toString()} style={styles.card}>
+                <View style={styles.cardHeader}>
+                  <Text style={styles.itemText}>Model: {item.model}</Text>
+                  <TouchableOpacity onPress={() => handleBookmark(item)}>
+                    <Icon name="bookmark" size={20} />
+                  </TouchableOpacity>
+                </View>
+                <Text style={styles.itemText}>source: {item.source}</Text>
+                <Text style={styles.itemText}>Price: {item.price}</Text>
+                <Text style={styles.itemText}>type: {item.type}</Text>
+                <Text style={styles.itemText}>Dealer: {item.carDealer}</Text>
+                <Text style={styles.itemText}>Location: {item.distance}</Text>
+                <Image source={{ uri: item.imageUrl }} style={styles.image} />
+              </View>
+            ))}
+          </ScrollView>
+
+          <ScrollView></ScrollView>
+        </>
       )}
     </SafeAreaView>
   );

@@ -8,14 +8,16 @@ const SearchPage = ({ navigation }) => {
     color: "",
     zipCode: "",
     price: "",
+    type: "",
+    year: "",
   });
 
   const handleSearch = () => {
     console.log("Search parameters:", searchParams);
-    if (!searchParams.model || !searchParams.make || !searchParams.zipCode || !searchParams.color || !searchParams.price) {
-      Alert.alert("Please fill in all fields");
-      return;
-    }
+
+
+
+
     navigation.navigate("Results", { params: searchParams });
   };
 
@@ -35,7 +37,22 @@ const SearchPage = ({ navigation }) => {
         onChangeText={(text) => setSearchParams({ ...searchParams, model: text })}
       />
       <TextInput
-        style={styles.input}
+
+        placeholder="New or Used"
+        value={searchParams.type}
+        onChangeText={(text) =>
+          setSearchParams({ ...searchParams, type: text })
+        }
+      />
+      <TextInput
+        placeholder="Year"
+        value={searchParams.year}
+        onChangeText={(text) =>
+          setSearchParams({ ...searchParams, year: text })
+        }
+      />
+      <TextInput
+
         placeholder="Color"
         value={searchParams.color}
         onChangeText={(text) => setSearchParams({ ...searchParams, color: text })}

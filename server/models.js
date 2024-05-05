@@ -39,10 +39,21 @@ const Car = sequelize.define("car", {
     type: Sequelize.STRING,
     allowNull: true,
   },
+  type: {
+    type: Sequelize.STRING,
+    allowNull: true,
+  },
+  source: {
+    type: Sequelize.STRING,
+    allowNull: true,
+  },
+  year: {
+    type: Sequelize.STRING,
+    allowNull: true,
+  },
 });
 
 const Notification = sequelize.define("notification", {
-  // Attributes
   newPrice: {
     type: Sequelize.DECIMAL(10, 2),
     allowNull: false,
