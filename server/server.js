@@ -42,14 +42,18 @@ app.post("/search", async (req, res) => {
 
 app.post("/car/favorite", async (req, res) => {
   try {
-    const { model, price, carDealer, distance, imageUrl } = req.body;
+    const { model, price, carDealer, distance, url, type, source, year } =
+      req.body;
     console.log(req.body);
     const car = await Car.create({
       model,
       price,
       carDealer,
       distance,
-      imageUrl,
+      url,
+      type,
+      source,
+      year,
     });
   } catch (error) {
     res.status(500).send("Error processing your request");
