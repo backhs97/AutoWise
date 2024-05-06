@@ -16,7 +16,7 @@ const LoginScreen = ({ navigation }) => {
         await AsyncStorage.removeItem('userCredentials');
       }
       // Navigate to another screen or reset navigation stack
-      navigation.replace('HomeScreen'); // Replace 'HomeScreen' with the screen you want to navigate to
+      navigation.replace('HomeScreen'); 
     } else {
       Alert.alert('Invalid Credentials', 'Please check your username and password!');
     }
