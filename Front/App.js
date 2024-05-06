@@ -9,6 +9,7 @@ import FavoritesPage from "./FavoritesPage";
 import ResultsScreen from "./ResultsScreen.js";
 import SignUpScreen from "./SignUpScreen";
 import LoginScreen from "./LoginScreen";
+import NotificationPage from "./NotificationPage";
 
 import Icon from "react-native-vector-icons/FontAwesome";
 
@@ -38,9 +39,29 @@ function SearchStack() {
 function Navbar() {
   return (
     <Tab.Navigator>
-      <Tab.Screen name="Welcome" component={WelcomeStackNavigator}/>
-      <Tab.Screen name="Results" component={SearchStack}/>
-      <Tab.Screen name="Favorites" component={FavoritesPage} />
+      <Tab.Screen name="Welcome" component={WelcomeStackNavigator} options={{
+        tabBarIcon: ({ color, size }) => (
+          <Icon name="home" size={size} color={color} />
+        )
+      }}
+    />
+      <Tab.Screen name="Results" component={SearchStack} options={{
+          tabBarIcon: ({ color, size }) => (
+            <Icon name="search" size={size} color={color} />
+          )
+        }}
+      />
+      <Tab.Screen name="Favorites" component={FavoritesPage} options={{
+          tabBarIcon: ({ color, size }) => (
+            <Icon name="heart" size={size} color={color} />
+          )
+        }}
+      />
+      <Tab.Screen name="Notifications" component={NotificationPage} options={{
+        tabBarIcon: ({ color, size }) => (
+          <Icon name="bell" color={color} size={size} />
+        )
+      }}/>
     </Tab.Navigator>
   );
 }
