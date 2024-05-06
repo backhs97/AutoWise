@@ -97,7 +97,7 @@ const ResultsScreen = ({ route, navigation }) => {
               <View key={index.toString()} style={styles.card}>
                 <View style={styles.cardHeader}>
                   <Text
-                    style={styles.itemText}
+                    style={{ color: "blue" }}
                     onPress={() =>
                       Linking.openURL(`https://autotrader.com${item.details}`)
                     }
