@@ -8,7 +8,7 @@ const LoginScreen = ({ navigation }) => {
   const [rememberMe, setRememberMe] = useState(false);
 
   const handleLogin = async () => {
-    // Placeholder login validation: replace with your actual logic
+
     if (username === "admin" && password === "password") {
       if (rememberMe) {
         await AsyncStorage.setItem('userCredentials', JSON.stringify({ username, password }));
