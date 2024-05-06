@@ -9,6 +9,7 @@ import {
   TouchableOpacity,
   ScrollView,
   Image,
+  Linking,
 } from "react-native";
 
 import { useEffect, useState } from "react";
@@ -71,7 +72,14 @@ const ResultsScreen = ({ route, navigation }) => {
             {searchResults1.map((item, index) => (
               <View key={index.toString()} style={styles.card}>
                 <View style={styles.cardHeader}>
-                  <Text style={styles.itemText}>Model: {item.model}</Text>
+                  <Text
+                    style={{ color: "blue" }}
+                    onPress={() =>
+                      Linking.openURL(`https://cars.com${item.details}`)
+                    }
+                  >
+                    Model: {item.model}
+                  </Text>
                   <TouchableOpacity onPress={() => handleBookmark(item)}>
                     <Icon name="bookmark" size={20} />
                   </TouchableOpacity>
@@ -88,7 +96,14 @@ const ResultsScreen = ({ route, navigation }) => {
             {searchResults2.map((item, index) => (
               <View key={index.toString()} style={styles.card}>
                 <View style={styles.cardHeader}>
-                  <Text style={styles.itemText}>Model: {item.model}</Text>
+                  <Text
+                    style={styles.itemText}
+                    onPress={() =>
+                      Linking.openURL(`https://autotrader.com${item.details}`)
+                    }
+                  >
+                    Model: {item.model}
+                  </Text>
                   <TouchableOpacity onPress={() => handleBookmark(item)}>
                     <Icon name="bookmark" size={20} />
                   </TouchableOpacity>
@@ -143,7 +158,7 @@ const styles = StyleSheet.create({
   },
   itemText: {
     fontSize: 14,
-    color: "#000",
+    color: "black",
     marginBottom: 5,
   },
 

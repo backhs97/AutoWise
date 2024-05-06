@@ -22,6 +22,7 @@ const scrapeCarData = async (searchParams) => {
       const carDistance = $(element).find(".miles-from").text().trim();
       const carType = $(element).find("p.stock-type").text();
       const imageUrl = $(element).find("img.vehicle-image").attr("data-src");
+      const carDetails = $(element).find("a").attr("href");
 
       cars.push({
         source: "cars.com",
@@ -31,6 +32,8 @@ const scrapeCarData = async (searchParams) => {
         distance: carDistance,
         type: carType,
         imageUrl: imageUrl,
+        year: year,
+        details: carDetails,
       });
     });
 
@@ -56,6 +59,7 @@ const scrapeCarData = async (searchParams) => {
       const imageUrl = $(
         "img.img-responsive-scale.img-vertically-aligned",
       ).attr("src");
+      const carDetails = $(element).find("a").attr("href");
 
       console.log(carModel);
       console.log(carPrice);
@@ -72,6 +76,8 @@ const scrapeCarData = async (searchParams) => {
         // distance: carDistance,
         type: carType,
         imageUrl: imageUrl,
+        year: year,
+        details: carDetails,
       });
     });
 
