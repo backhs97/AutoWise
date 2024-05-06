@@ -3,15 +3,29 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
+import WelcomeScreen from "./WelcomeScreen";
 import SearchScreen from "./SearchScreen";
 import FavoritesPage from "./FavoritesPage";
 import ResultsScreen from "./ResultsScreen.js";
+import SignUpScreen from "./SignUpScreen";
+import LoginScreen from "./LoginScreen";
 
-import { Icon } from "react-native-vector-icons/FontAwesome";
+// Assuming FontAwesome icons are used correctly elsewhere as needed
+import Icon from "react-native-vector-icons/FontAwesome";
 
 const Stack = createStackNavigator();
-
+const WelcomeStack = createStackNavigator();
 const Tab = createBottomTabNavigator();
+
+function WelcomeStackNavigator() {
+  return (
+    <WelcomeStack.Navigator>
+      <WelcomeStack.Screen name="Welcome" component={WelcomeScreen}/>
+      <WelcomeStack.Screen name="SignUp" component={SignUpScreen}/>
+      <WelcomeStack.Screen name="Login" component={LoginScreen}/>
+    </WelcomeStack.Navigator>
+  );
+}
 
 function SearchStack() {
   return (
@@ -25,7 +39,8 @@ function SearchStack() {
 function Navbar() {
   return (
     <Tab.Navigator>
-      <Tab.Screen name="Search" component={SearchStack} />
+      <Tab.Screen name="Welcome" component={WelcomeStackNavigator}/>
+      <Tab.Screen name="Results" component={SearchStack}/>
       <Tab.Screen name="Favorites" component={FavoritesPage} />
     </Tab.Navigator>
   );
