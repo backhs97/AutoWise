@@ -10,7 +10,6 @@ import ResultsScreen from "./ResultsScreen.js";
 import SignUpScreen from "./SignUpScreen";
 import LoginScreen from "./LoginScreen";
 
-// Assuming FontAwesome icons are used correctly elsewhere as needed
 import Icon from "react-native-vector-icons/FontAwesome";
 
 const Stack = createStackNavigator();
