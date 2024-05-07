@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, TextInput, TouchableOpacity, View, Switch, Alert } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const LoginScreen = ({ navigation }) => {
   const [username, setUsername] = useState('');
@@ -8,8 +9,9 @@ const LoginScreen = ({ navigation }) => {
  
  
 
-  const handleLogin = () => {
+  const handleLogin = async() => {
 
+    await AsyncStorage.setItem('username', username);
 
       navigation.navigate('Landing'); 
   };

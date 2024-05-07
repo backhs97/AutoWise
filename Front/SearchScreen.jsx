@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import React, { useState, useEffect } from "react";
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from "react-native";
-import { useAuth } from './AuthContext';
 
-const SearchPage = ({ navigation }) => {
+const SearchPage = ({ route, navigation }) => {
   const [searchParams, setSearchParams] = useState({
     model: "",
     make: "",
@@ -13,6 +13,20 @@ const SearchPage = ({ navigation }) => {
     year: "",
   });
 
+  const [user, setUser] = useState('');  
+
+   useEffect(() => {
+    const getUser = async () => {
+      const username = await AsyncStorage.getItem('username'); 
+      if (username !== null) {
+        setUser(username);
+      }
+    };
+
+    getUser();
+  }, []);  
+
+
 
   const handleSearch = () => {
     console.log("Search parameters:", searchParams);
@@ -22,7 +36,7 @@ const SearchPage = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.headerText}>Search for your desired car</Text>
+      <Text style={styles.headerText}>Hello {user} Search for your desired car</Text>
       <TextInput
         style={styles.input}
         placeholder="Make"
