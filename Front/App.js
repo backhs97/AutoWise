@@ -40,21 +40,6 @@ function SearchStack() {
 function Navbar() {
   return (
     <Tab.Navigator>
-      {/* 
-
-
-      <Tab.Screen
-        name="Welcome"
-        component={WelcomeStackNavigator}
-        options={{
-          tabBarIcon: ({ color, size }) => (
-            <Icon name="home" size={size} color={color} />
-          ),
-        }}
-      />
-
-      */}
-
       <Tab.Screen
         name="Results"
         component={SearchStack}
