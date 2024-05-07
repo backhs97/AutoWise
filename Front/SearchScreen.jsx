@@ -22,7 +22,7 @@ const SearchPage = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.headerText}>Hi {user ? user.username : 'Guest'}, search for your desired car</Text>
+      <Text style={styles.headerText}>Search for your desired car</Text>
       <TextInput
         style={styles.input}
         placeholder="Make"
