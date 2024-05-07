@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from "react-native";
+import { useAuth } from './AuthContext';
 
 const SearchPage = ({ navigation }) => {
   const [searchParams, setSearchParams] = useState({
@@ -12,18 +13,16 @@ const SearchPage = ({ navigation }) => {
     year: "",
   });
 
+  const { user } = useAuth();
+
   const handleSearch = () => {
     console.log("Search parameters:", searchParams);
-
-
-
-
     navigation.navigate("Results", { params: searchParams });
   };
 
   return (
     <View style={styles.container}>
-      <Text style={styles.headerText}>Search for your desired car</Text>
+      <Text style={styles.headerText}>Hi {user ? user.username : 'Guest'}, search for your desired car</Text>
       <TextInput
         style={styles.input}
         placeholder="Make"
@@ -118,5 +117,7 @@ const styles = StyleSheet.create({
 });
 
 export default SearchPage;
+
+
 
 
