@@ -1,11 +1,17 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, TextInput, TouchableOpacity, View, Switch, Alert } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage'; // Ensure to install this package
+import {useAuth} from "./AuthContext";
+
+
 
 const LoginScreen = ({ navigation }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
+  const {setUser} = useAuth();
+ 
+ 
 
   const handleLogin = async () => {
 
@@ -15,11 +21,12 @@ const LoginScreen = ({ navigation }) => {
       } else {
         await AsyncStorage.removeItem('userCredentials');
       }
-      // Navigate to another screen or reset navigation stack
+      Alert.alert('Login Successful', 'You have succefully logged in.');
       navigation.replace('HomeScreen'); 
     } else {
       Alert.alert('Invalid Credentials', 'Please check your username and password!');
     }
+    setUser({username});
   };
 
   return (
@@ -106,3 +113,4 @@ const styles = StyleSheet.create({
 });
 
 export default LoginScreen;
+
