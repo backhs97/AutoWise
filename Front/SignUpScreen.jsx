@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, Text, TextInput, TouchableOpacity, View, Alert} from 'react-native';
 
 const SignUpScreen = ({navigation}) => {
   const [username, setUsername] = useState('');
@@ -23,6 +23,7 @@ const SignUpScreen = ({navigation}) => {
         placeholder="Email"
         value={email}
         onChangeText={setEmail}
+        keyboardType="email-address"
         autoCapitalize="none"
       />
       <TextInput
@@ -42,6 +43,7 @@ const SignUpScreen = ({navigation}) => {
       />
       <TouchableOpacity style={styles.button} onPress={handleSignUp}>
         <Text style={styles.buttonText}>Sign Up</Text>
+        <TouchableOpacity onPress={() => navigation.navigate('Login')}></TouchableOpacity>
       </TouchableOpacity>
     </View>
   );

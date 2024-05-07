@@ -5,6 +5,8 @@ const LoginScreen = ({ navigation }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
+ 
+ 
 
   const handleLogin = () => {
 
@@ -96,3 +98,4 @@ const styles = StyleSheet.create({
 });
 
 export default LoginScreen;
+
