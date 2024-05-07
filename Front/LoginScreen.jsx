@@ -1,25 +1,15 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, TextInput, TouchableOpacity, View, Switch, Alert } from 'react-native';
-import AsyncStorage from '@react-native-async-storage/async-storage'; // Ensure to install this package
 
 const LoginScreen = ({ navigation }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
 
-  const handleLogin = async () => {
+  const handleLogin = () => {
 
-    if (username === "admin" && password === "password") {
-      if (rememberMe) {
-        await AsyncStorage.setItem('userCredentials', JSON.stringify({ username, password }));
-      } else {
-        await AsyncStorage.removeItem('userCredentials');
-      }
-      // Navigate to another screen or reset navigation stack
-      navigation.replace('HomeScreen'); 
-    } else {
-      Alert.alert('Invalid Credentials', 'Please check your username and password!');
-    }
+
+      navigation.navigate('Landing'); 
   };
 
   return (

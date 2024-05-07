@@ -20,9 +20,10 @@ const Tab = createBottomTabNavigator();
 function WelcomeStackNavigator() {
   return (
     <WelcomeStack.Navigator>
-      <WelcomeStack.Screen name="Welcome" component={WelcomeScreen}/>
-      <WelcomeStack.Screen name="SignUp" component={SignUpScreen}/>
-      <WelcomeStack.Screen name="Login" component={LoginScreen}/>
+      <WelcomeStack.Screen name="Welcome" component={WelcomeScreen} />
+      <WelcomeStack.Screen name="SignUp" component={SignUpScreen} />
+      <WelcomeStack.Screen name="Login" component={LoginScreen} />
+      <WelcomeStack.Screen name="Landing" component={Navbar} />
     </WelcomeStack.Navigator>
   );
 }
@@ -39,29 +40,48 @@ function SearchStack() {
 function Navbar() {
   return (
     <Tab.Navigator>
-      <Tab.Screen name="Welcome" component={WelcomeStackNavigator} options={{
-        tabBarIcon: ({ color, size }) => (
-          <Icon name="home" size={size} color={color} />
-        )
-      }}
-    />
-      <Tab.Screen name="Results" component={SearchStack} options={{
+      {/* 
+
+
+      <Tab.Screen
+        name="Welcome"
+        component={WelcomeStackNavigator}
+        options={{
+          tabBarIcon: ({ color, size }) => (
+            <Icon name="home" size={size} color={color} />
+          ),
+        }}
+      />
+
+      */}
+
+      <Tab.Screen
+        name="Results"
+        component={SearchStack}
+        options={{
           tabBarIcon: ({ color, size }) => (
             <Icon name="search" size={size} color={color} />
-          )
+          ),
         }}
       />
-      <Tab.Screen name="Favorites" component={FavoritesPage} options={{
+      <Tab.Screen
+        name="Favorites"
+        component={FavoritesPage}
+        options={{
           tabBarIcon: ({ color, size }) => (
             <Icon name="heart" size={size} color={color} />
-          )
+          ),
         }}
       />
-      <Tab.Screen name="Notifications" component={NotificationPage} options={{
-        tabBarIcon: ({ color, size }) => (
-          <Icon name="bell" color={color} size={size} />
-        )
-      }}/>
+      <Tab.Screen
+        name="Notifications"
+        component={NotificationPage}
+        options={{
+          tabBarIcon: ({ color, size }) => (
+            <Icon name="bell" color={color} size={size} />
+          ),
+        }}
+      />
     </Tab.Navigator>
   );
 }
@@ -69,7 +89,7 @@ function Navbar() {
 function App() {
   return (
     <NavigationContainer>
-      <Navbar />
+      <WelcomeStackNavigator />
     </NavigationContainer>
   );
 }

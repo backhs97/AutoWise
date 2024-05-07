@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 
-const SignUpScreen = () => {
+const SignUpScreen = ({navigation}) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
@@ -10,7 +10,9 @@ const SignUpScreen = () => {
     console.log('Username:', username);
     console.log('Password:', password);
     console.log('Email:', email);
-    // Implement your signup logic here
+
+    navigation.navigate("Login")
+    
   };
 
   return (

@@ -12,11 +12,9 @@ const SearchPage = ({ navigation }) => {
     year: "",
   });
 
+
   const handleSearch = () => {
     console.log("Search parameters:", searchParams);
-
-
-
 
     navigation.navigate("Results", { params: searchParams });
   };
