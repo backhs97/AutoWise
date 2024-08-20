@@ -1,4 +1,4 @@
-# AutoWise
+# CarWise
 
 CarWise is a car-searching application designed to help users find the perfect car based on specific search criteria. The app scrapes car listings from popular car sale websites and provides an easy-to-use interface for searching, saving favorites, and viewing detailed car information.
 
